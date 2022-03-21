@@ -7,5 +7,55 @@
 </head>
 <body>
 <h1> Welcome to songr App </h1>
+<div>
+<form action="/addalbum" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title"></br>
+
+    <label for="artist">Artist:</label>
+    <input type="text" id="artist" name="artist"></br>
+
+    <label for="songCount">Song Count:</label>
+    <input type="text" id="songCount" name="songCount"></br>
+
+    <label for="length">Length:</label>
+    <input type="text" id="length" name="length"></br>
+
+    <label>ImageUrl:</label>
+    <input type="text" name="imageUrl"></br>
+
+
+    <button type="submit">Add Album</button>
+
+</form>
+</div>
+</br></br>
+<!--
+<form action="/delete" method="get">
+    <label for="title1"> Album Title:</label>
+    <input type="text" id="title1" name="title"></br>
+
+    <button type="submit">Delete Album</button>
+
+</form>
+-->
+
+<ul th:each="album: ${albumsList}">
+    <div class="Album">
+
+        <img th:src="${album.imageUrl}">
+
+        <div class="container">
+    <label>Album ID : </label><span th:text="${album.id}"></span></br>
+    <label>Title: </label><span th:text="${album.title}"></span></br>
+    <label>Artist: </label><span th:text="${album.artist}"></span></br>
+    <label>Song Count: </label><span th:text="${album.songCount}"></span></br>
+    <label>Length: </label><span th:text="${album.length}"></span></br>
+      <label>  <a th:href="${album.imageUrl}">Image URL </a> </label><span th:text="${album.imageUrl}"></span></br>
+
+        </div>
+</div>
+    <p>**********************************************************</p>
+</ul>
 </body>
 </html>
