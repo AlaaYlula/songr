@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Album</title>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<ul class = "var">
+    <li class = "varItem"><a href="/">Home</a></li>
+    <li class = "varItem"><a href="/albums">All Albums</a></li>
+    <li class = "varItem"><a href="/songs">All Songs</a></li>
+    <li class = "varItem"><a href="/albumDetails">Album Details</a></li>
+
+</ul>
+</br></br>
+<form method="post" action="/album/details">
+    <select name="album">
+        <option th:each="album : ${albumsList}"
+                th:text="${album.title}"
+                th:value="${album.id}"
+                th:selected="${album.id}">
+
+        </option>
+    </select>
+    <button type="submit">Show Details</button>
+</form>
+<ul th:each="album: ${album1}">
+    <div class="Album">
+        <li>
+            <img th:src="${album.imageUrl}">
+
+            <div class="container">
+                <label>Album ID : </label><span th:text="${album.id}"></span></br>
+                <label>Title: </label><span th:text="${album.title}"></span></br>
+                <label>Artist: </label><span th:text="${album.artist}"></span></br>
+                <label>Song Count: </label><span th:text="${album.songCount}"></span></br>
+                <label>Songs: </label>
+                <ul th:each="song: ${album.songs}">
+                    <li> <span th:text="${song.title}"></span></br></li>
+                </ul>
+                </br>
+
+                <label>  <a th:href="${album.imageUrl}">Image URL </a> </label><span th:text="${album.imageUrl}"></span></br>
+            </div>
+        </li>
+
+    </div>
+    <p>**********************************************************</p>
+</ul>
+
+</body>
+</html>

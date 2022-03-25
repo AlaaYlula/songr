@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Song</title>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<ul class = "var">
+    <li class = "varItem"><a href="/">Home</a></li>
+    <li class = "varItem"><a href="/albums">All Albums</a></li>
+    <li class = "varItem"><a href="/songs">All Songs</a></li>
+    <li class = "varItem"><a href="/albumDetails">Album Details</a></li>
+
+</ul>
+</br></br>
+<div>
+<form action="/song" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title"></br>
+
+    <label for="length">Length:</label>
+    <input type="text" id="length" name="length"></br>
+
+    <label for="trackNumber">Track Number:</label>
+    <input type="text" id="trackNumber" name="trackNumber"></br>
+
+    <select name="album">
+        <option th:each="album : ${albumsList}"
+                th:text="${album.title}"
+                th:value="${album.id}"
+                th:selected="${album.id}">
+
+        </option>
+    </select>
+    <button type="submit">Add Song To Album</button>
+
+</form>
+
+</div>
+</br></br>
+
+<ul th:each="song: ${songsList}">
+    <div class="Album">
+        <li>
+            <div class="container">
+                <label>Song ID : </label><span th:text="${song.id}"></span></br>
+                <label>Title: </label><span th:text="${song.title}"></span></br>
+                <label>Length: </label><span th:text="${song.length}"></span></br>
+                <label>Track Number: </label><span th:text="${song.trackNumber}"></span></br>
+            </div>
+
+            <form method="post" action="/deletesong">
+                <input type="hidden" th:value="${song.id}" name="song_id">
+                <input type="submit" value="Delete Song">
+            </form>
+        </li>
+
+    </div>
+    <p>**********************************************************</p>
+</ul>
+</body>
+</html>

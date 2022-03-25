@@ -1,30 +1,27 @@
 package com.example.songr.domain;
 
-import com.sun.xml.bind.v2.model.core.ID;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Album {
 
     @Id
     @GeneratedValue //(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private Long id;
     private String title;
     private String artist;
-    private int songCount;
-    private int length;
+    private int songCount = 0;
+    private double length = 0 ;
     private String imageUrl;
 
+    @OneToMany(mappedBy = "album")
+    List<Song> songs;
 
     public Album(){
 
     }
-    public Album( String title, String artist, int songCount, int length,String imageUrl) {
+    public Album( String title, String artist, int songCount, double length,String imageUrl) {
         this.imageUrl = imageUrl;
         this.title = title;
         this.artist = artist;
@@ -32,11 +29,19 @@ public class Album {
         this.length = length;
     }
 
-    public Integer getId() {
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,7 +57,7 @@ public class Album {
         this.songCount = songCount;
     }
 
-    public void setLength(int length) {
+    public void setLength(double length) {
         this.length = length;
     }
 
@@ -76,7 +81,7 @@ public class Album {
         return songCount;
     }
 
-    public int getLength() {
+    public double getLength() {
         return length;
     }
 
@@ -88,6 +93,8 @@ public class Album {
                 ", artist='" + artist + '\'' +
                 ", songCount=" + songCount +
                 ", length=" + length +
+                ", songs=" + songs +
+
                 '}';
     }
 }
