@@ -2,19 +2,22 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Album</title>
     <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/allalbums">All Albums</a></li>
-</ul>
+<ul class = "var">
+    <li class = "varItem"><a href="/">Home</a></li>
+    <li class = "varItem"><a href="/albums">All Albums</a></li>
+    <li class = "varItem"><a href="/songs">All Songs</a></li>
+    <li class = "varItem"><a href="/albumDetails">Album Details</a></li>
 
+</ul>
+</br></br>
 <h1> Welcome to songr App </h1>
 
 <div>
-<form action="/addalbum" method="post">
+<form action="/album" method="post">
     <label for="title">Title:</label>
     <input type="text" id="title" name="title"></br>
 
@@ -37,9 +40,9 @@
 </div>
 </br></br>
 <!--
-<form action="/delete" method="get">
-    <label for="title1"> Album Title:</label>
-    <input type="text" id="title1" name="title"></br>
+<form action="/delete/{id}" method="delete">
+    <label for="id1"> Album ID:</label>
+    <input type="number" id="id1" name="id"></br>
 
     <button type="submit">Delete Album</button>
 
@@ -48,19 +51,29 @@
 
 <ul th:each="album: ${albumsList}">
     <div class="Album">
-
-        <img th:src="${album.imageUrl}">
+     <li>
+         <img th:src="${album.imageUrl}">
 
         <div class="container">
     <label>Album ID : </label><span th:text="${album.id}"></span></br>
     <label>Title: </label><span th:text="${album.title}"></span></br>
     <label>Artist: </label><span th:text="${album.artist}"></span></br>
     <label>Song Count: </label><span th:text="${album.songCount}"></span></br>
-    <label>Length: </label><span th:text="${album.length}"></span></br>
-      <label>  <a th:href="${album.imageUrl}">Image URL </a> </label><span th:text="${album.imageUrl}"></span></br>
+    <label>Songs: </label>
+            <ul th:each="song: ${album.songs}">
+               <li> <span th:text="${song.title}"></span></br></li>
+            </ul>
+            </br>
 
+    <label>  <a th:href="${album.imageUrl}">Image URL </a> </label><span th:text="${album.imageUrl}"></span></br>
         </div>
-</div>
+         <form method="post" action="/deletealbum">
+             <input type="hidden" th:value="${album.id}" name="album_id">
+             <input type="submit" value="Delete Album">
+         </form>
+     </li>
+
+    </div>
     <p>**********************************************************</p>
 </ul>
 </body>
