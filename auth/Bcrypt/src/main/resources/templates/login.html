@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link th:href="@{/LoginStyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<ul class = "var">
+    <li class = "varItem"><a href="/login">Log In</a></li>
+    <li class = "varItem"><a href="/signup">Sign Up</a></li>
+    <li class = "varItem"><a href="/">Home</a></li>
+</ul>
+</br></br>
+
+<h1>Please log in!</h1>
+</br></br>
+<div class="container">
+<form action="/login" method="POST">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter Username"  name="username">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter Password" name="password">
+
+    <button type="submit">Log In</button>
+</form>
+</div>
+
+
+</body>
+</html>
