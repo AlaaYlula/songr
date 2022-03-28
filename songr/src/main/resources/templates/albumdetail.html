@@ -26,6 +26,7 @@
     </select>
     <button type="submit">Show Details</button>
 </form>
+
 <ul th:each="album: ${album1}">
     <div class="Album">
         <li>
@@ -37,7 +38,7 @@
                 <label>Artist: </label><span th:text="${album.artist}"></span></br>
                 <label>Song Count: </label><span th:text="${album.songCount}"></span></br>
                 <label>Songs: </label>
-                <ul th:each="song: ${album.songs}">
+                <ul th:each="song: ${songsList}">
                     <li> <span th:text="${song.title}"></span></br></li>
                 </ul>
                 </br>
@@ -50,5 +51,24 @@
     <p>**********************************************************</p>
 </ul>
 
+<ul th:each="album: ${album2}">
+    <div class="Album">
+        <li>
+            <img th:src="${album.imageUrl}">
+
+            <div class="container">
+                <label>Album ID : </label><span th:text="${album.id}"></span></br>
+                <label>Title: </label><span th:text="${album.title}"></span></br>
+                <label>Artist: </label><span th:text="${album.artist}"></span></br>
+                <label>Song Count: </label><span th:text="${album.songCount}"></span></br>
+                </br>
+
+                <label>  <a th:href="${album.imageUrl}">Image URL </a> </label><span th:text="${album.imageUrl}"></span></br>
+            </div>
+        </li>
+
+    </div>
+    <p>**********************************************************</p>
+</ul>
 </body>
 </html>

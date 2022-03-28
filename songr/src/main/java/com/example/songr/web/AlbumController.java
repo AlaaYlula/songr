@@ -109,9 +109,28 @@ public class AlbumController {
     }
     @PostMapping("/album/details")
     public String GetAlbumDetails(@RequestParam long album, Model model) {
+//        List<Album> albums = albumRepository.findAll();
+//        for (Album albumElement : albums) {
+//            Long album_id = albumElement.getId();
+//            if(album_id == album){
+//                model.addAttribute("album1",albumElement);
+//        model.addAttribute("songsList", songRepository.findByAlbumId(album_id));
+//
+//            }
+//        }
         Album foundAlbum = albumRepository.findById(album).orElseThrow();
         System.out.println("**************"+foundAlbum);
-         model.addAttribute("album1",foundAlbum);
+        List<Song> songsAlbum = foundAlbum.getSongs();
+        if(songsAlbum.isEmpty()){
+            System.out.println("********************** Empty Songs ****************");
+            model.addAttribute("album2",foundAlbum);
+        }else {
+            System.out.println("**********************Not  Empty Songs ****************");
+
+            model.addAttribute("album1", foundAlbum);
+            model.addAttribute("songsList", songRepository.findByAlbumId(foundAlbum.getId()));
+
+        }
         model.addAttribute("albumsList",albumRepository.findAll());
 
       //   return new RedirectView("/albumDetails");
