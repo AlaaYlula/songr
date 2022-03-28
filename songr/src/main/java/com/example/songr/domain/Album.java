@@ -3,6 +3,7 @@ package com.example.songr.domain;
 import javax.persistence.*;
 import java.util.List;
 
+//@JsonIgnoreProperties({"songs"})
 @Entity
 public class Album {
 

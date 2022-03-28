@@ -72,7 +72,6 @@ public class Song {
                 ", title='" + title + '\'' +
                 ", length=" + length +
                 ", trackNumber=" + trackNumber +
-                ", album=" + album +
                 '}';
     }
 }
